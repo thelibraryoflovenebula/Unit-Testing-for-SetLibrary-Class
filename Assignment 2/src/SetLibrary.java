@@ -107,13 +107,14 @@ public final class SetLibrary {
      * @throws IllegalArgumentException when one of setA or setB is null or
      * empty
      */
-    public static ArrayList<Integer> createIntersection(ArrayList<Integer> setA,
-                                                        ArrayList<Integer> setB)
-            throws IllegalArgumentException {
+    public static ArrayList<Integer> createIntersection(ArrayList<Integer> setA, ArrayList<Integer> setB) throws IllegalArgumentException {
+
         ArrayList<Integer> setCommon = new ArrayList<Integer>();
+
         if (setA == null || setB == null || setA.size() == 0 ) {
             throw new IllegalArgumentException("Arraylist arguments cannot be null or empty");
         }
+
         for (int i = 0; i < setA.size(); i++) {
             for (int j = 0; j < setB.size(); j++) {
                 if (setA.get(i) == setB.get(j)) {
