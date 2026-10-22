@@ -188,10 +188,16 @@ class SetLibraryTest {
 /* 3. CREATE INTERSECTION METHOD */
     /**
      * 1. TEST CASE FOR BOTH NULL SETS
-
      */
     @Test
     public void nullSetsIsIllegal() {
+        /* Test Data  */
+        ArrayList<Integer> firstNull = null;
+        ArrayList<Integer> secondNull = null;
+
+        /* Assert Throw */
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> sl.createIntersection(firstNull, secondNull));
+
     }
 
     /**
@@ -199,6 +205,12 @@ class SetLibraryTest {
      */
     @Test
     public void firstNullSetIllegal() {
+        /* Test Data  */
+        ArrayList<Integer> firstNull = null;
+        ArrayList<Integer> secondSet = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+
+        /* Assert Throw */
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> sl.createIntersection(firstNull, secondSet));
 
     }
 
@@ -207,19 +219,110 @@ class SetLibraryTest {
      */
     @Test
     public void secondNullSetIllegal() {
+        /* Test Data  */
+        ArrayList<Integer> firstSet = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+        ArrayList<Integer> secondNull = null;
+
+        /* Assert Throw */
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> sl.createIntersection(firstSet, secondNull));
 
     }
 
     /**
-     * 4. TEST CASE FOR ARRAY SIZE F 0
+     * 4. TEST CASE FOR SET A SIZE 0
      */
     @Test
-    public void setSizeZeroIllegal() {
+    public void setASizeZeroIllegal() {
+        /* Test Data  */
+        ArrayList<Integer> firstSet = new ArrayList<Integer>(Arrays.asList());
+        ArrayList<Integer> secondSet = new ArrayList<Integer>(Arrays.asList(1,2,3));
 
+        /* Assert Throw */
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> sl.createIntersection(firstSet, secondSet));
     }
 
+    /** BUG THIS IS THE BUG!!!!!!
+     * 5. TEST CASE FOR SET B SIZE 0
+
+    @Test
+    public void setBSizeZeroIllegal() {
+        ArrayList<Integer> firstSet = new ArrayList<Integer>(Arrays.asList(1,2,3,4));
+        ArrayList<Integer> secondSet = new ArrayList<Integer>(Arrays.asList());
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> sl.createIntersection(firstSet, secondSet));
+    }
+
+     */
 
 
+    /**
+     * 6. TEST CASE FOR ACTUAL INTERSECTION WITH COMMONS
+     * return set of size two commons which are 6 and 7
+     */
+    @Test
+    public void hasIntersections() {
+        /* Test Data */
+        ArrayList<Integer> firstSet = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7));
+        ArrayList<Integer> secondSet = new ArrayList<Integer>(Arrays.asList(6,7,8,9,10));
+
+        /* Expected Result */
+        ArrayList<Integer> expectedResult = new ArrayList<Integer>(Arrays.asList(6,7));
+
+        /* Actual Result */
+        ArrayList<Integer> actualResult = sl.createIntersection(firstSet, secondSet);
+
+        /* Assert same size */
+        Assertions.assertEquals(expectedResult.size(), actualResult.size());
+
+        /* Assert same list  */
+        Assertions.assertIterableEquals(expectedResult, actualResult);
+    }
+
+    /**
+     * 7. TEST CASE FOR ACTUAL INTERSECTION WITH NO COMMONS
+     * return set of of size zero
+     */
+    @Test
+    public void hasNoIntersections() {
+        /* Test Data */
+        ArrayList<Integer> firstSet = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7));
+        ArrayList<Integer> secondSet = new ArrayList<Integer>(Arrays.asList(8,9,10));
+
+        /* Expected Result */
+        ArrayList<Integer> expectedResult = new ArrayList<Integer>(Arrays.asList());
+
+        /* Actual Result */
+        ArrayList<Integer> actualResult = sl.createIntersection(firstSet, secondSet);
+
+        /* Assert same size */
+        Assertions.assertEquals(expectedResult.size(), actualResult.size());
+
+        /* Assert same list  */
+        Assertions.assertIterableEquals(expectedResult, actualResult);
+    }
+
+    /**
+     * 8. TEST CASE FOR ACTUAL INTERSECTION -> HAS DUPLICATES
+     */
+    @Test
+    public void hasDuplicateIntersections() {
+        /* Test Data */
+        ArrayList<Integer> firstSet = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7));
+        ArrayList<Integer> secondSet = new ArrayList<Integer>(Arrays.asList(6,6,6,7,7,8,8,9,10));
+
+        /* Expected Result */
+        ArrayList<Integer> expectedResult = new ArrayList<Integer>(Arrays.asList(6,7));
+
+        /* Actual Result */
+        ArrayList<Integer> actualResult = sl.createIntersection(firstSet, secondSet);
+
+        /* Assert same size */
+        Assertions.assertEquals(expectedResult.size(), actualResult.size());
+
+        /* Assert same list  */
+        Assertions.assertIterableEquals(expectedResult, actualResult);
+    }
+
+/* 4. ISSUBSET METHOD */
 
 
 
