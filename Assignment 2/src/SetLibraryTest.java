@@ -21,8 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
  *      3. Line 96, should replace with this conditional statement:
  *      (setA == null || setB == null || setA.size() == 0 || setB.size())
  *      This new code adds setB as one of the gates
- *
- *
  */
 class SetLibraryTest {
     //for using methods
